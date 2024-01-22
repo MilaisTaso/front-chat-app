@@ -6,7 +6,7 @@ module.exports = {
     'dist',
     '.eslintrc.cjs',
     'prettier.config.cjs',
-    '.stylelintrc.cjs',
+    'tailwind.config.js',
     'vite.config.ts',
   ],
   parserOptions: {
