@@ -1,5 +1,5 @@
-import { initializeApp } from 'firebase/app';
-
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { initializeApp, getApps } from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,6 +11,6 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-
-export default app;
+if (!getApps()?.length) {
+  initializeApp(firebaseConfig);
+}

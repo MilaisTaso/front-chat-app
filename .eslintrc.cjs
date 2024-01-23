@@ -44,6 +44,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    // 'import/no-extraneous-dependencies': 'off',
     // airbnb import/extensions
     'import/extensions': [
       'error',
