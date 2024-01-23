@@ -6,17 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "fix": "npm run -s format && npm run -s lint:fix && npm run -s lint:style",
+    "fix": "npm run -s format && npm run -s lint:fix",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint --fix \"src/**/*.{ts,tsx}\" --report-unused-disable-directives --max-warnings 0",
-    "lint:style": "stylelint --fix \"src/**/*.{css,less,sass,scss}\"",
     "format": "prettier --write --log-level=warn \"{public,src}/**/*.{js,jsx,ts,tsx,html,gql,graphql,json}\"",
     "preview": "vite preview"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
+    "@tanstack/react-query": "^5.17.19",
+    "firebase": "^10.7.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.5",
