@@ -5,9 +5,6 @@ module.exports = {
   ignorePatterns: [
     'dist',
     '.eslintrc.cjs',
-    'prettier.config.cjs',
-    'tailwind.config.js',
-    'vite.config.ts',
   ],
   parserOptions: {
     project: './tsconfig.json',
@@ -44,7 +41,8 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    // 'import/no-extraneous-dependencies': 'off',
+    // dependencies内のパッケージについてもエラーが出てしまう 原因調査中
+    'import/no-extraneous-dependencies': 'off',
     // airbnb import/extensions
     'import/extensions': [
       'error',
