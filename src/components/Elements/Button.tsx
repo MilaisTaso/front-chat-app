@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import { Spinner } from '@/components/Elements/Spinner';
 
+const butonType = ['button', 'submit', 'reset'] as const;
+
 const variants = {
   primary: 'bg-blue-600 text-white',
   inverse: 'bg-white text-blue-600',
@@ -21,7 +23,7 @@ type IconProps =
   | { endIcon?: undefined; startIcon?: undefined };
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  type: 'button' | 'submit' | 'reset'
+  type?: (typeof butonType)[number];
   variant?: keyof typeof variants;
   size?: keyof typeof sizes;
   isLoading?: boolean;
@@ -39,18 +41,18 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       endIcon,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <button
-      ref={ref}
-      // eslint-disable-next-line react/button-has-type
+        ref={ref}
+        // eslint-disable-next-line react/button-has-type
         type={type}
         className={clsx(
           'flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none hover:opacity-80',
           variants[variant],
           sizes[size],
-          className
+          className,
         )}
         {...props}
       >
@@ -59,7 +61,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';

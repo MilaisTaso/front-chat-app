@@ -42,7 +42,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     // dependencies内のパッケージについてもエラーが出てしまう 原因調査中
-    'import/no-extraneous-dependencies': 'off',
+    'import/no-extraneous-dependencies': 'warn',
     // airbnb import/extensions
     'import/extensions': [
       'error',
