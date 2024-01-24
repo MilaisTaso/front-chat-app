@@ -1,9 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { ContentLayout } from "@/components/Layout/Layout";
+import { Button } from "@/components/Elements/Button";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello React</div>
+    element: <ContentLayout title="login"><Button>Google Login</Button></ContentLayout>
   }
 ]);
 
