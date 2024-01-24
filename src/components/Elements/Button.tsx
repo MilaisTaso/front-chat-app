@@ -3,8 +3,6 @@ import * as React from 'react';
 
 import { Spinner } from '@/components/Elements/Spinner';
 
-const butonType = ['button', 'submit', 'reset'] as const;
-
 const variants = {
   primary: 'bg-blue-600 text-white',
   inverse: 'bg-white text-blue-600',
@@ -22,8 +20,8 @@ type IconProps =
   | { endIcon: React.ReactElement; startIcon?: never }
   | { endIcon?: undefined; startIcon?: undefined };
 
+// React.ButtonHTMLAttributesを継承しているためbuttonが持つ属性を継承している
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  type?: (typeof butonType)[number];
   variant?: keyof typeof variants;
   size?: keyof typeof sizes;
   isLoading?: boolean;
