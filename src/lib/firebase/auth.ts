@@ -7,12 +7,14 @@ import {
   signOut,
 } from 'firebase/auth';
 
-const auth = getAuth();
+import { auth } from './settings';
+
 
 export const signIn = async (): Promise<UserCredential> => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
+    console.log(result.user.uid)
     return result;
   } catch (error) {
     const authError = error as AuthError;
