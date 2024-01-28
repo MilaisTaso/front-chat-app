@@ -9,8 +9,12 @@ const queryConfig: DefaultOptions = {
   queries: {
     refetchOnWindowFocus: false,
     retry: false,
-    throwOnError: false, // Suspenseでエラーを拾う
+    throwOnError: true, // Suspenseでエラーを拾う
   },
+  mutations: {
+    retry: false,
+    throwOnError: true
+  }
 };
 
 export const queryClient = new QueryClient({ defaultOptions: queryConfig });
