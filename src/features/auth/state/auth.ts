@@ -1,7 +1,6 @@
 // src/hooks/useAuthState.ts
 import { useEffect } from "react";
-import { atom, useSetAtom, useAtom } from 'jotai';
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { atom, useSetAtom } from 'jotai';
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from '@/lib/firebase/settings'
