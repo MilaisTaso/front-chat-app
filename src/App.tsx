@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Button } from "./components/Elements/Button";
 import { queryClient } from '@/lib/query-client'
 import router from "./routes/public";
+import { useAuthState } from "./features/auth/state/auth";
 
 const ErrorFallback = () => {
   return (
@@ -25,6 +26,8 @@ const ErrorFallback = () => {
 
 
 const App: React.FC = () => {
+  useAuthState();
+
   return (
     <React.Suspense>
       <ErrorBoundary FallbackComponent={ErrorFallback}>

@@ -6,11 +6,11 @@ import { MutationConfig } from "@/lib/query-client";
 import { signIn } from "@/lib/firebase/auth";
 
 
-type SiginInOptions = {
+type SignInOptions = {
   config?: MutationConfig<typeof signIn, AuthError>
 }
 
-export const useSiginIn = ({ config }: SiginInOptions = {}) => {
+export const useSignIn = ({ config }: SignInOptions = {}) => {
   return useMutation({
     ...config,
     mutationFn: signIn,
