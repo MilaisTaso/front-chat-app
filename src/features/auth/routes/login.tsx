@@ -14,11 +14,16 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <Container display="flex">
+    <>
       <Head title="login" />
-      <Content title="Front Chat App">
-        <Button onClick={handleSignInClick}>Google Login</Button>
-      </Content>
-    </Container>
+      <Container display="flex" className="min-h-screen ">
+        <Content title="Front Chat App">
+          <Button onClick={handleSignInClick} isLoading={isPending}>
+            Google Login
+          </Button>
+        </Content>
+        <img src='' />
+      </Container>
+    </>
   );
 };
