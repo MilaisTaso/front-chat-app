@@ -9,11 +9,11 @@ import {
 import { auth } from './settings';
 
 
-
 export const signIn = async (): Promise<User> => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
+    throw new Error('test error')
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential!.accessToken;
     return result.user;
