@@ -1,5 +1,4 @@
-import React from 'react';
-import { useErrorBoundary } from 'react-error-boundary';
+import React, { useEffect } from 'react';
 import { Head } from '@/components/Head/Head';
 import { Button } from '@/components/Elements/Button';
 import { Content } from '@/components/Layout/Content';
@@ -8,7 +7,6 @@ import { useSignIn } from '../api/auth';
 import Hero from '@/assets/hero.png';
 
 export const LoginPage: React.FC = () => {
-  const { showBoundary } = useErrorBoundary();
   const {
     mutate: signIn,
     isPending,
@@ -17,11 +15,16 @@ export const LoginPage: React.FC = () => {
   } = useSignIn({
     config: {
       onError: (authError) => {
-        showBoundary(authError)
         alert(authError.message);
       },
     },
   });
+
+  useEffect(() => {
+    if (isError && error) {
+      throw error;
+    }
+  },[isError, error]);
 
   const handleSignInClick = () => {
     signIn(undefined);

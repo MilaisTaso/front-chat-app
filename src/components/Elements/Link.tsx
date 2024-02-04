@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, NavLinkProps } from 'react-router-dom';
 import { clsx } from 'clsx';
 
-type LinkProps = {
+export type LinkProps = {
   to: string;
 } & NavLinkProps;
 
