@@ -1,9 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { LoginPage } from '@/features/auth/routes/Login';
+import { ErrorBoundary } from 'react-error-boundary';
+import { LoginPage } from '@/features/auth/routes/login';
 
 export const publicRouter = createBrowserRouter([
   {
     path: '/',
-    element:<LoginPage />,
+    element: (
+      <ErrorBoundary fallback={<div>Error</div>}>
+        <LoginPage />
+      </ErrorBoundary>
+    ),
   },
 ]);
