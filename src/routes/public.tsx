@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { LoginPage } from '@/features/auth/routes/login';
+import { LoginPage } from '@/features/auth/routes/Login';
 
 export const publicRouter = createBrowserRouter([
   {

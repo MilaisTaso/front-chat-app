@@ -1,48 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Head } from '@/components/Head/Head';
 import { Button } from '@/components/Elements/Button';
 import { Content } from '@/components/Layout/Content';
 import { Container } from '@/components/Layout/Container';
-import { useSignIn } from '../api/auth';
+import { signIn } from '@/lib/firebase/auth';
 import Hero from '@/assets/hero.png';
 
 export const LoginPage: React.FC = () => {
-  const {
-    mutate: signIn,
-    isPending,
-    isError,
-    error,
-  } = useSignIn({
-    config: {
-      onError: (authError) => {
-        alert(authError.message);
-      },
-    },
-  });
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoding] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (isError && error) {
-      throw error;
+  const signInProcess = async () => {
+    try {
+      setLoding(true);
+      await signIn();
+      setError(null);
+      setLoding(false);
+    } catch (err) {
+      console.log('error!!!')
+      setError(error as Error);
+      setLoding(false);
+      throw err;
     }
-  },[isError, error]);
+  };
 
   const handleSignInClick = () => {
-    signIn(undefined);
+    signInProcess().catch(() => {});
   };
+
+  if (error) {
+    throw error;
+  }
 
   return (
     <>
       <Head title="login" />
-      <Container display="flex" className="min-h-screen">
-        <Content title="Front Chat App">
-          <Button onClick={handleSignInClick} isLoading={isPending}>
-            Google Login
-          </Button>
-        </Content>
-        <div>
-          <img src={Hero} alt="hero" className="" />
-        </div>
-      </Container>
+      <ErrorBoundary fallback={<div>Error</div>}>
+        <Container display="flex" className="min-h-screen">
+          <Content title="Front Chat App">
+            <Button onClick={handleSignInClick} isLoading={loading}>
+              Google Login
+            </Button>
+          </Content>
+          <div>
+            <img src={Hero} alt="hero" className="" />
+          </div>
+        </Container>
+      </ErrorBoundary>
     </>
   );
 };

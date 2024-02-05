@@ -6,7 +6,7 @@ import { Nav, NavProps } from '../Elements/Nav';
 
 export type HeaderProps = {
   headTitle?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   navLinks: NavProps;
 };
 

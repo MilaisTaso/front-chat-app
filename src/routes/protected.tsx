@@ -1,10 +1,10 @@
-import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import { ChatPage } from '@/features/chat/routes/Chat';
 
 export const protectedRouter = createBrowserRouter([
   {
     path: '/',
-    element:<div>Chat Page</div>,
+    element:<ChatPage />,
   },
   {
     path: '/profile',
