@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Head } from '../Head/Head';
 import { Logo } from '@/components/Header/Logo';
-import { Nav, NavProps } from '../Elements/Nav';
+import { Nav, NavProps } from './Nav';
 
 export type HeaderProps = {
   headTitle?: string;
@@ -18,9 +18,9 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <>
       <Head title={headTitle} />
-      <header>
+      <header className='flex justify-between'>
         <Logo />
-        <div className='flex gap-1'>
+        <div className='flex gap-1 items-center'>
           <Nav links={navLinks.links} className={navLinks.className} />
           {children}
         </div>

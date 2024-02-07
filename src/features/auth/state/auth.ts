@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from '@/lib/firebase/settings'
 import { Customer } from "../types/customer";
-import { createData, getData } from "@/lib/firebase/store";
+import { createData, getData } from "@/lib/firebase/fire-store";
 
 type CustomerState = Customer | null;
 

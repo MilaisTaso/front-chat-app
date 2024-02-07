@@ -10,12 +10,12 @@ export type NavProps = {
 
 export const Nav: React.FC<NavProps> = ({links, className}) => {
   return (
-    <nav>
+    <nav className='items-center'>
       <ul className={clsx('flex gap-x-1 max-w-5xl', className)}>
         {
           links.map((link) => (
             <li key={link.to} className='flex-auto'>
-              <Link {...link}>
+              <Link {...link} className="text-center">
                 {link.children}
               </Link>
             </li>
