@@ -36,5 +36,6 @@ export type MutationConfig<
 > = UseMutationOptions<
   ExtractFnReturnType<MutationFnType>,
   ExtractErrType,
+  //mutationFnが受け取る引数の型を定義するものなので、実行する関数の引数の順番に注意すること
   Parameters<MutationFnType>[0]
 >;
