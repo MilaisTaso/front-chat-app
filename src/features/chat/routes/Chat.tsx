@@ -12,7 +12,10 @@ import { TextAreaField } from '@/components/Form/TextAreaField';
 import { Button } from '@/components/Elements/Button';
 
 const schema = z.object({
-  content: z.string().min(2, { message: '2文字以上で入力して下さい' }).nullable(),
+  content: z
+    .string()
+    .min(2, { message: '2文字以上で入力して下さい' })
+    .nullable(),
 });
 
 const chatOptions: useCreateChatOptions = {
@@ -21,7 +24,7 @@ const chatOptions: useCreateChatOptions = {
 export const ChatPage: React.FC = () => {
   const [customer] = useAtom(customerAtom);
   const mutate = useCreateChat(chatOptions);
-  const {showBoundary} = useErrorBoundary();
+  const { showBoundary } = useErrorBoundary();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,17 +40,17 @@ export const ChatPage: React.FC = () => {
         <Form<Chat['data'], typeof schema>
           id="create-chat"
           schema={schema}
-          onSubmit={async (values) => {
-            console.log(values);
+          onSubmit={async (values: Chat['data']) => {
             try {
               await mutate.mutateAsync({
                 data: {
                   content: values.content,
                   customerId: customer!.id,
+                  created_at: new Date().toDateString(),
                 },
               });
             } catch {
-              showBoundary(mutate.error)
+              showBoundary(mutate.error);
             }
           }}
         >

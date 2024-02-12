@@ -8,18 +8,19 @@ export type Chat = {
   data: {
     content: string;
     customerId: string;
-  }
+    created_at: string;
+  };
 };
 
 export type useCreateChatOptions = {
-  path: string
+  path: string;
   config?: MutationConfig<typeof storeData<Chat>, FirebaseError>;
 };
 
 export const useCreateChat = ({ config, path }: useCreateChatOptions) => {
   return useMutation({
     ...config,
-    mutationFn:  (newChat) => {
+    mutationFn: (newChat) => {
       return storeData<Chat>(newChat, path);
     },
     onMutate: (newChat) => {
@@ -29,6 +30,6 @@ export const useCreateChat = ({ config, path }: useCreateChatOptions) => {
     // todo inValidateQueries()でキャッシュを最新にする処理を追加する
     onSuccess: () => {},
     // todo 楽観的更新によって追加したデータを消去しつつrefetchする勝利を追加する
-    onError: () => {}
+    onError: () => {},
   });
 };
