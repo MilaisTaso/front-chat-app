@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { z } from 'zod';
+import { useErrorBoundary } from 'react-error-boundary';
 
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
@@ -19,13 +20,15 @@ const chatOptions: useCreateChatOptions = {
 };
 export const ChatPage: React.FC = () => {
   const [customer] = useAtom(customerAtom);
+  const mutate = useCreateChat(chatOptions);
+  const {showBoundary} = useErrorBoundary();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (customer) {
       navigate('/');
     }
   }, [customer, navigate]);
-  const mutate = useCreateChat(chatOptions);
 
   return (
     <ProtectedLayout>
@@ -33,14 +36,20 @@ export const ChatPage: React.FC = () => {
       <div>
         <Form<Chat['data'], typeof schema>
           id="create-chat"
+          schema={schema}
           onSubmit={async (values) => {
             console.log(values);
-            // mutate.mutateAsync({
-            //   data: {
-            //     message: values.message,
-            //     customerId: customer!.id,
-            //   },
-            // });
+            try {
+              await mutate.mutateAsync({
+                data: {
+                  content: values.content,
+                  customerId: customer!.id,
+                },
+              });
+            } catch {
+              console.log(mutate.error)
+              showBoundary(mutate.error)
+            }
           }}
         >
           {({ register, formState }) => {
@@ -50,10 +59,8 @@ export const ChatPage: React.FC = () => {
                   id="message"
                   label="メッセージ"
                   error={formState.errors.content}
-                  registration={register('content', { required: 'aaa' })}
+                  registration={register('content')}
                 />
-                {formState.errors.content && <div>入力がありません</div>}
-                {formState.errors.content && console.log(formState.errors.content)}
                 <Button type="submit">送信</Button>;
               </>
             );
