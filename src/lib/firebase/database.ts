@@ -7,6 +7,7 @@ export const storeData = async<T> (data: T, collectionPath: string): Promise<voi
     const dbRef = ref(db, collectionPath)
     await push(dbRef,data)
   } catch (err) {
+    console.log(err)
     throw err as FirebaseError
   }
 }

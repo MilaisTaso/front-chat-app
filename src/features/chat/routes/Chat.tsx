@@ -47,7 +47,6 @@ export const ChatPage: React.FC = () => {
                 },
               });
             } catch {
-              console.log(mutate.error)
               showBoundary(mutate.error)
             }
           }}

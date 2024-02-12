@@ -22,7 +22,6 @@ export const useAuthState = () => {
         const appCustomer = await getData(`users/${firebaseUser.uid}`) as Customer;
 
         if (appCustomer) {
-          console.log(appCustomer)
           setCustomer(appCustomer);
         } else {
           const currentCustomer: Customer = {
@@ -32,11 +31,9 @@ export const useAuthState = () => {
             imageUrl: '',
           };
           await createData(`users/${firebaseUser.uid}`, currentCustomer)
-          console.log(currentCustomer)
           setCustomer(currentCustomer);
         }
       } else {
-        console.log('ユーザー情報なし')
         setCustomer(null);
       }
     });
