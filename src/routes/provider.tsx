@@ -1,17 +1,14 @@
-import { RouterProvider } from "react-router-dom";
-import { useAtom } from "jotai";
+import { RouterProvider } from 'react-router-dom';
+import { useAtom } from 'jotai';
 
-import { publicRouter } from "./public";
-import { protectedRouter } from "./protected";
-import { customerAtom } from "@/features/auth/state/auth";
-
+import { publicRouter } from './public';
+import { protectedRouter } from './protected';
+import { customerAtom } from '@/features/auth/state/use-auth';
 
 export const AppRoutes = () => {
   const [customer] = useAtom(customerAtom);
 
-  const router = customer? protectedRouter : publicRouter;
+  const router = customer ? protectedRouter : publicRouter;
 
-  return (
-    <RouterProvider router={router} />
-  )
-}
+  return <RouterProvider router={router} />;
+};

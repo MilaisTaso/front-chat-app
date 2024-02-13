@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { ChatPage } from '@/features/chat/routes/Chat';
+import { CreateChat } from '@/features/chat/components/CreateChat';
 
 export const protectedRouter = createBrowserRouter([
   {
     path: '/',
-    element:<ChatPage />,
+    element:<CreateChat />,
   },
   {
     path: '/profile',

@@ -6,10 +6,11 @@ import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { ProtectedLayout } from '@/components/Layout/ProtectedLayout';
 import { Form } from '@/components/Form/Form';
-import { customerAtom } from '@/features/auth/state/auth';
-import { Chat, useCreateChat, useCreateChatOptions } from '../api/chat';
+import { customerAtom } from '@/features/auth/state/use-auth';
+import { Chat, useCreateChat, useCreateChatOptions } from '../api/createChat';
 import { TextAreaField } from '@/components/Form/TextAreaField';
 import { Button } from '@/components/Elements/Button';
+import { useChats } from '../state/use-chats';
 
 const schema = z.object({
   content: z
@@ -21,11 +22,12 @@ const schema = z.object({
 const chatOptions: useCreateChatOptions = {
   path: 'chat',
 };
-export const ChatPage: React.FC = () => {
+export const CreateChat: React.FC = () => {
   const [customer] = useAtom(customerAtom);
   const mutate = useCreateChat(chatOptions);
   const { showBoundary } = useErrorBoundary();
   const navigate = useNavigate();
+  const chats = useChats();
 
   useEffect(() => {
     if (customer) {
@@ -37,6 +39,11 @@ export const ChatPage: React.FC = () => {
     <ProtectedLayout>
       <h1 className="text-heading2">Chat Room</h1>
       <div>
+        {chats.map((chat) => (
+          <p key={chat.id}>{chat.data.content}</p>
+        ))}
+      </div>
+      <div>
         <Form<Chat['data'], typeof schema>
           id="create-chat"
           schema={schema}
@@ -46,7 +53,7 @@ export const ChatPage: React.FC = () => {
                 data: {
                   content: values.content,
                   customerId: customer!.id,
-                  created_at: new Date().toDateString(),
+                  created_at: new Date().toString(),
                 },
               });
             } catch {

@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Button } from '@/components/Elements/Button';
 import { queryClient } from '@/lib/query-client';
-import { useAuthState } from '@/features/auth/state/auth';
+import { useAuthState } from '@/features/auth/state/use-auth';
 
 const ErrorFallback = () => {
   return (
