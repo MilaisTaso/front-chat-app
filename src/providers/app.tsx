@@ -3,6 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 import { Button } from '@/components/Elements/Button';
 import { queryClient } from '@/lib/query-client';
@@ -38,6 +39,11 @@ const AppProvider: React.FC<ProviderProps> = ({ children }) => {
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
             {import.meta.env.MODE === 'development' && <ReactQueryDevtools />}
+            <ToastContainer
+              position="bottom-center"
+              closeOnClick
+              theme="colored"
+            />
             {children}
           </QueryClientProvider>
         </HelmetProvider>

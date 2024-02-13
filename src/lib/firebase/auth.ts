@@ -8,7 +8,6 @@ import {
 
 import { auth } from './settings';
 
-
 export const signIn = async (): Promise<User> => {
   const provider = new GoogleAuthProvider();
   try {
