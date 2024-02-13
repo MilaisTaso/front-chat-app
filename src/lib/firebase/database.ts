@@ -7,11 +7,11 @@ export const storeData = async <T>(
 ): Promise<void> => {
   try {
     console.log(data);
+    throw new FirebaseError('403', '参照権限がありません');
     const db = getDatabase();
     const dbRef = ref(db, collectionPath);
     await push(dbRef, data);
   } catch (err) {
-    console.log(err);
     throw err as FirebaseError;
   }
 };

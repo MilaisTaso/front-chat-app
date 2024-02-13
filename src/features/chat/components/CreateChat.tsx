@@ -48,7 +48,6 @@ export const CreateChat: React.FC = () => {
           id="create-chat"
           schema={schema}
           onSubmit={async (values: Chat['data']) => {
-            try {
               await mutate.mutateAsync({
                 data: {
                   content: values.content,
@@ -56,9 +55,9 @@ export const CreateChat: React.FC = () => {
                   created_at: new Date().toString(),
                 },
               });
-            } catch {
-              showBoundary(mutate.error);
-            }
+              if (mutate.isError) {
+                showBoundary(mutate.error);
+              }
           }}
         >
           {({ register, formState }) => {

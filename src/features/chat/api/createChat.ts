@@ -23,13 +23,10 @@ export const useCreateChat = ({ config, path }: useCreateChatOptions) => {
     mutationFn: (newChat) => {
       return storeData<Chat>(newChat, path);
     },
-    onMutate: (newChat) => {
-      // todo 楽観的更新処理を追加する
-      queryClient.cancelQueries();
-    },
-    // todo inValidateQueries()でキャッシュを最新にする処理を追加する
-    onSuccess: () => {},
     // todo 楽観的更新によって追加したデータを消去しつつrefetchする勝利を追加する
-    onError: () => {},
+    onError: (err) => {
+      console.log(err.code)
+      throw err;
+    },
   });
 };
