@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { LoginPage } from '@/features/auth/routes/login';
+import { ToastContainer } from 'react-toastify';
+import { LoginPage } from '@/features/auth/routes/Login';
 
 export const publicRouter = createBrowserRouter([
   {

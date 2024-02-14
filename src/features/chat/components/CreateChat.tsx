@@ -4,6 +4,7 @@ import { useErrorBoundary } from 'react-error-boundary';
 
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { ProtectedLayout } from '@/components/Layout/ProtectedLayout';
 import { Form } from '@/components/Form/Form';
 import { customerAtom } from '@/features/auth/state/use-auth';
@@ -38,6 +39,7 @@ export const CreateChat: React.FC = () => {
   return (
     <ProtectedLayout>
       <h1 className="text-heading2">Chat Room</h1>
+      <ToastContainer />
       <div>
         {chats.map((chat) => (
           <p key={chat.id}>{chat.data.content}</p>
@@ -48,16 +50,19 @@ export const CreateChat: React.FC = () => {
           id="create-chat"
           schema={schema}
           onSubmit={async (values: Chat['data']) => {
-              await mutate.mutateAsync({
-                data: {
-                  content: values.content,
-                  customerId: customer!.id,
-                  created_at: new Date().toString(),
-                },
-              });
-              if (mutate.isError) {
-                showBoundary(mutate.error);
-              }
+            await mutate.mutateAsync({
+              data: {
+                content: values.content,
+                customerId: customer!.id,
+                createdAt: new Date().toString(),
+              },
+            });
+            if (mutate.isSuccess) {
+              toast.success('メッセージを作成しました');
+            }
+            if (mutate.isError) {
+              showBoundary(mutate.error);
+            }
           }}
         >
           {({ register, formState }) => {

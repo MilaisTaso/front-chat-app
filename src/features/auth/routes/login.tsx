@@ -12,7 +12,7 @@ export const LoginPage: React.FC = () => {
   const { showBoundary } = useErrorBoundary();
 
   const handleSignIn = async () => {
-    await mutation.mutate(undefined);
+    await mutation.mutateAsync(undefined);
 
     if (mutation.isError) {
       showBoundary(mutation.error);

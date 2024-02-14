@@ -25,7 +25,7 @@ export const useSignIn = ({ config }: SignInOptions = {}) => {
   });
 };
 
-export const useSignOut = ({config}: SignOutOptions) => {
+export const useSignOut = ({config}: SignOutOptions = {}) => {
   return useMutation({
     ...config,
     mutationFn: logOut,

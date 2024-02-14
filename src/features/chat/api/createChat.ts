@@ -2,13 +2,13 @@ import { useMutation } from '@tanstack/react-query';
 import { FirebaseError } from 'firebase/app';
 
 import { storeData } from '@/lib/firebase/database';
-import { MutationConfig, queryClient } from '@/lib/query-client';
+import { MutationConfig } from '@/lib/query-client';
 
 export type Chat = {
   data: {
     content: string;
     customerId: string;
-    created_at: string;
+    createdAt: string;
   };
 };
 
