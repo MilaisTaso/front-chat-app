@@ -18,6 +18,7 @@ export const useSignIn = ({ config }: SignInOptions = {}) => {
     ...config,
     mutationFn: signIn,
     onSuccess: () => {
+      toast.success('ログインしました')
     },
     onError: () => {
       toast.error('ログインに失敗しました');

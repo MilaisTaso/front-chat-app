@@ -39,7 +39,6 @@ export const CreateChat: React.FC = () => {
   return (
     <ProtectedLayout>
       <h1 className="text-heading2">Chat Room</h1>
-      <ToastContainer />
       <div>
         {chats.map((chat) => (
           <p key={chat.id}>{chat.data.content}</p>
