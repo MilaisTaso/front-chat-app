@@ -17,7 +17,7 @@ export const Container: React.FC<ContainerProps> = ({
       className={clsx(
         display !== 'normal' && 'flex',
         display === 'direction' && 'flex-col',
-        'mx-auto w-full bg-orange-300',
+        'mx-auto w-ful',
         className,
       )}
     >

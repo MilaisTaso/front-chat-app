@@ -10,22 +10,17 @@ const variants = {
 };
 
 const sizes = {
-  sm: 'py-2 px-4 text-sm',
-  md: 'py-2 px-6 text-base',
+  sm: 'py-2 px-4 text-body',
+  md: 'py-2 px-6 text-body',
   lg: 'py-3 px-8 text-lg',
 };
-
-type IconProps =
-  | { startIcon: React.ReactElement; endIcon?: never }
-  | { endIcon: React.ReactElement; startIcon?: never }
-  | { endIcon?: undefined; startIcon?: undefined };
 
 // React.ButtonHTMLAttributesを継承しているためbuttonが持つ属性を継承している
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: keyof typeof variants;
   size?: keyof typeof sizes;
   isLoading?: boolean;
-} & IconProps;
+};
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -35,8 +30,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant = 'primary',
       size = 'md',
       isLoading = false,
-      startIcon,
-      endIcon,
       ...props
     },
     ref,
@@ -54,9 +47,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        {isLoading && <Spinner size="sm" className="text-current" />}
-        {!isLoading && startIcon}
-        <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
+        {isLoading ? (
+          <span className="flex items-center m-2 gap-2">
+            <Spinner size="sm" className="text-current" />
+            Loading...
+          </span>
+        ) : (
+          <span className="mx-2 flex items-center">{props.children}</span>
+        )}
       </button>
     );
   },
