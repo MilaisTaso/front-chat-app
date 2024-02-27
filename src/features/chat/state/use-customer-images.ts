@@ -3,7 +3,7 @@ import { ref, getDownloadURL } from 'firebase/storage';
 import { FirebaseError } from 'firebase/app';
 import { storage } from '@/lib/firebase/settings';
 
-export const useCsutomerImage = (imagePath: string) => {
+export const useCustomerImage = (imagePath: string) => {
   const [imageUrl, setImageUrl] = useState<string>('');
   const storageRef = useMemo(() => ref(storage, imagePath), [imagePath]);
 
