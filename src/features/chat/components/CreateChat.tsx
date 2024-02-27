@@ -4,7 +4,7 @@ import { useErrorBoundary } from 'react-error-boundary';
 
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { ProtectedLayout } from '@/components/Layout/ProtectedLayout';
 import { Form } from '@/components/Form/Form';
 import { customerAtom } from '@/features/auth/state/use-auth';
@@ -12,6 +12,8 @@ import { Chat, useCreateChat, useCreateChatOptions } from '../api/createChat';
 import { TextAreaField } from '@/components/Form/TextAreaField';
 import { Button } from '@/components/Elements/Button';
 import { useChats } from '../state/use-chats';
+import { useCsutomerImage } from '../state/use-customer-images';
+import { ChatList } from './ChatList';
 
 const schema = z.object({
   content: z
@@ -20,18 +22,19 @@ const schema = z.object({
     .nullable(),
 });
 
-const chatOptions: useCreateChatOptions = {
-  path: 'chat',
-};
 export const CreateChat: React.FC = () => {
   const [customer] = useAtom(customerAtom);
+  const chatOptions: useCreateChatOptions = {
+    path: `chat/${customer!.id}`,
+  };
   const mutate = useCreateChat(chatOptions);
   const { showBoundary } = useErrorBoundary();
   const navigate = useNavigate();
-  const chats = useChats();
+  const chats = useChats(customer!.id);
+  const customerImage = useCsutomerImage(customer!.imageUrl);
 
   useEffect(() => {
-    if (customer) {
+    if (!customer) {
       navigate('/');
     }
   }, [customer, navigate]);
@@ -39,12 +42,7 @@ export const CreateChat: React.FC = () => {
   return (
     <ProtectedLayout>
       <h1 className="text-heading2">Chat Room</h1>
-      <div>
-        {chats.map((chat) => (
-          <p key={chat.id}>{chat.data.content}</p>
-        ))}
-      </div>
-      <div>
+      <ChatList chats={chats} customerImage={customerImage} customerName={customer!.name}/>
         <Form<Chat['data'], typeof schema>
           id="create-chat"
           schema={schema}
@@ -78,7 +76,6 @@ export const CreateChat: React.FC = () => {
             );
           }}
         </Form>
-      </div>
     </ProtectedLayout>
   );
 };
