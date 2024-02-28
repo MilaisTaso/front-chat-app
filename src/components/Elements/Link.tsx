@@ -9,11 +9,10 @@ export type LinkProps = {
 export const Link: React.FC<LinkProps> = ({ to, children, className }) => {
   return (
     <NavLink
-      className={({ isActive, isPending }) =>
+      className={({ isActive }) =>
         clsx(
-          isPending && 'isPending',
-          isActive && 'isActive',
-          'text-indigo-600 hover:text-indigo-900',
+          'text-indigo-600 hover:text-indigo-900 font-semibold',
+          isActive && 'text-red-300',
           className,
         )
       }

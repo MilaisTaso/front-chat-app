@@ -6,24 +6,16 @@ import { Nav, NavProps } from './Nav';
 
 export type HeaderProps = {
   headTitle?: string;
-  children?: React.ReactNode;
   navLinks: NavProps;
 };
 
-export const Header: React.FC<HeaderProps> = ({
-  headTitle,
-  children,
-  navLinks,
-}) => {
+export const Header: React.FC<HeaderProps> = ({ headTitle, navLinks }) => {
   return (
     <>
       <Head title={headTitle} />
-      <header className='flex justify-between'>
-        <Logo />
-        <div className='flex gap-1 items-center'>
-          <Nav links={navLinks.links} className={navLinks.className} />
-          {children}
-        </div>
+      <header className="flex justify-between items-center bg-gray-950 text-white px-4 py-2">
+        <Logo to="/">Front Chat App</Logo>
+        <Nav links={navLinks.links} className={navLinks.className} />
       </header>
     </>
   );

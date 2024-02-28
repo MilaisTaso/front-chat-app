@@ -1,7 +1,20 @@
+import clsx from 'clsx';
 import React from 'react';
+import { Link as RouterLink, LinkProps } from 'react-router-dom';
 
-import { Link } from '@/components/Elements/Link';
+export type RouterLinkProps = {
+  className?: string
+  children: React.ReactNode
+} & LinkProps
 
-export const Logo: React.FC = () => {
-  return <Link to="/" className='font-bold text-body'>Front Chat App</Link>;
+export const Logo: React.FC<RouterLinkProps> = ({
+  className,
+  children,
+  ...props
+}: LinkProps) => {
+  return (
+    <RouterLink {...props} className={clsx('font-bold text-heading2', className)}>
+      {children}
+    </RouterLink>
+  );
 };
