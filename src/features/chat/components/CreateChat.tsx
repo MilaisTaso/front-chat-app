@@ -48,15 +48,15 @@ export const CreateChat: React.FC<CreateChatProps> = ({ customerId }) => {
     >
       {({ register, formState }) => {
         return (
-          <>
+          <div className='flex items-center border border-4 border-gray-300 rounded-md mx-6 my-6 shadow-md'>
             <TextAreaField
               id="message"
-              label="メッセージ"
               error={formState.errors.content}
               registration={register('content')}
+              className='flex-auto'
             />
-            <Button type="submit">送信</Button>;
-          </>
+            <Button type="submit" size='sm' className='bg-gray-950'>Send</Button>
+          </div>
         );
       }}
     </Form>

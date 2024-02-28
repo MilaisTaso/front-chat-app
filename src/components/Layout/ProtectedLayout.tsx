@@ -26,14 +26,6 @@ export const ProtectedLayout: React.FC<LayOutProps> = ({
   className,
   children,
 }) => {
-  const mutation = useSignOut();
-  const handleSignOut = async () => {
-    await mutation.mutateAsync(undefined);
-
-    if (mutation.isError) {
-      toast.error('正常にログアウトできませんでした。');
-    }
-  };
   return (
     <>
       <div className='w-full'>

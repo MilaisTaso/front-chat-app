@@ -15,7 +15,7 @@ export const signIn = async (): Promise<User> => {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential!.accessToken;
     return result.user;
-  } catch (error) {
+  } catch (error: unknown) {
     const authError = error as AuthError;
     console.error('Authentication error:', authError.message);
     throw authError;
@@ -23,5 +23,11 @@ export const signIn = async (): Promise<User> => {
 };
 
 export const logOut = async (): Promise<void> => {
-  await signOut(auth);
+  try {
+    await signOut(auth);
+  } catch (error) {
+    const authError = error as AuthError;
+    console.error('Logout error:', authError.message);
+    throw authError;
+  }
 };

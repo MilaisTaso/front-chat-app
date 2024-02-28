@@ -32,6 +32,9 @@ export const useSignOut = ({config}: SignOutOptions = {}) => {
     mutationFn: logOut,
     onSuccess: () => {
       toast.success('ログアウトしました')
+    },
+    onError: () => {
+      toast.error('ログアウトに失敗しました。')
     }
   })
 }

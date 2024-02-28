@@ -2,9 +2,10 @@ import React from 'react';
 import { clsx } from 'clsx';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 
-import { useFetcher } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Link, LinkProps } from '@/components/Elements/Link';
 import { Button } from '../Elements/Button';
+import { useSignOut } from '@/features/auth/api/auth';
 
 export type NavProps = {
   className?: string;
@@ -12,10 +13,13 @@ export type NavProps = {
 };
 
 export const Nav: React.FC<NavProps> = ({ links, className }) => {
-  const fetcher = useFetcher();
+  const mutation = useSignOut();
+  const handleSignOut = async () => {
+    await mutation.mutateAsync(undefined);
+  };
   return (
     <nav>
-      <ul className={clsx('flex items-center max-w-5xl gap-x-3', className)}>
+      <ul className={clsx('flex items-center max-w-5xl gap-x-2', className)}>
         {links.map((link) => (
           <li key={link.to} className="flex-auto">
             <Link {...link} className="text-center">
@@ -24,11 +28,13 @@ export const Nav: React.FC<NavProps> = ({ links, className }) => {
           </li>
         ))}
         <li className="flex-auto">
-          <fetcher.Form method="post" action="/logout">
-            <Button className='py-0 px-0 bg-white border-none bg-gray-950'>
-              <RiLogoutBoxRLine size="1.5rem" color="white" />
-            </Button>
-          </fetcher.Form>
+          <Button
+            className="py-0 px-0 border-none bg-gray-950"
+            type="submit"
+            onClick={handleSignOut}
+          >
+            <RiLogoutBoxRLine size="1.5rem" color="white" />
+          </Button>
         </li>
       </ul>
     </nav>

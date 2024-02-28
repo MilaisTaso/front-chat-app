@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper';
@@ -11,13 +10,10 @@ type TextAreaFieldProps = FieldWrapperPassThroughProps & {
 export const TextAreaField = (props: TextAreaFieldProps) => {
   const { id, label, className, registration, error } = props;
   return (
-    <FieldWrapper id={id} label={label} error={error}>
+    <FieldWrapper id={id} label={label} error={error} className={className}>
       <textarea
         name={id}
-        className={clsx(
-          'bg-white appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm',
-          className
-        )}
+        className="bg-white border-none appearance-none block w-full resize-none text-body border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
         {...registration}
       />
     </FieldWrapper>
