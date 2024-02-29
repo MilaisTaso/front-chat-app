@@ -38,5 +38,5 @@ export const useAuthState = async () => {
     });
 
     return () => unsubscribe();
-  }, [setCustomer]);
+  });
 };

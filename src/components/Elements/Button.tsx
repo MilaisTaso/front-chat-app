@@ -11,6 +11,7 @@ const variants = {
 };
 
 const sizes = {
+  elementOnly: 'py-0 px-0 text-body',
   sm: 'py-2 px-4 text-body',
   md: 'py-2 px-6 text-body',
   lg: 'py-3 px-8 text-lg',

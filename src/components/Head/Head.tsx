@@ -12,7 +12,7 @@ export const Head: React.FC<HeadProps> = ({ title = '', description = '' }) => {
       title={title ? `${title} | Front Chat App` : undefined}
       defaultTitle="Front Chat App"
     >
-      <meta name="description" content={description || "Sinple Chat Application"} />
+      <meta name="description" content={description} />
     </Helmet>
   );
 };

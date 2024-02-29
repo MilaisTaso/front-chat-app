@@ -1,6 +1,9 @@
 import React from "react"
 
-export type LayOutProps = {
+export type FCProps = {
   className?: string
-  children: React.ReactNode
 }
+
+export type ContainerProps = {
+  children: React.ReactNode
+} & FCProps

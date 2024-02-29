@@ -11,8 +11,8 @@ export const Link: React.FC<LinkProps> = ({ to, children, className }) => {
     <NavLink
       className={({ isActive }) =>
         clsx(
-          'text-indigo-600 hover:text-indigo-900 font-semibold',
-          isActive && 'text-red-300',
+          'hover:text-indigo-700 font-semibold text-center text-body',
+          isActive && 'text-zinc-500',
           className,
         )
       }

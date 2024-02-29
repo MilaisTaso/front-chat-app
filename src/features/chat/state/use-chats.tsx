@@ -11,11 +11,11 @@ export type ChatResponse = {
 export type Chats = ChatResponse[];
 
 export const useChats = (path: string) => {
-  const dbref = useMemo(() => ref(db, `chat/${path}`), [path]);
+  const dbRef = useMemo(() => ref(db, `chat/${path}`), [path]);
   const [chats, setChats] = useState<Chats>([]);
 
   useEffect(() => {
-    const unsubscribe = onChildAdded(dbref, async (snapshot) => {
+    const unsubscribe = onChildAdded(dbRef, async (snapshot) => {
       if (snapshot.exists()) {
         const newChats: ChatResponse = {
           id: snapshot.key!,
@@ -27,7 +27,7 @@ export const useChats = (path: string) => {
       }
     });
     return () => unsubscribe();
-  }, [dbref]);
+  }, [dbRef]);
 
   return chats;
 };

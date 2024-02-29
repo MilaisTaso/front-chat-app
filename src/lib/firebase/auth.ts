@@ -12,8 +12,6 @@ export const signIn = async (): Promise<User> => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential!.accessToken;
     return result.user;
   } catch (error: unknown) {
     const authError = error as AuthError;

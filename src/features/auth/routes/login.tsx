@@ -1,28 +1,42 @@
 import React from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
-import { Head } from '@/components/Head/Head';
+
+import { useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
 import { Button } from '@/components/Elements/Button';
 import { Container } from '@/components/Layout/Container';
 import Hero from '@/assets/hero.png';
 import { useSignIn } from '../api/auth';
 import { GoogleIcon } from '@/components/svg/GoogleIcon';
 import { Spinner } from '@/components/Elements/Spinner';
+import { customerAtom } from '../state/use-auth';
 
 export const LoginPage: React.FC = () => {
+  const [customer] = useAtom(customerAtom);
   const mutation = useSignIn();
+  const navigate = useNavigate();
   const { showBoundary } = useErrorBoundary();
 
   const handleSignIn = async () => {
     await mutation.mutateAsync(undefined);
+
+    if (mutation.isSuccess) {
+      navigate('/chat');
+    }
 
     if (mutation.isError) {
       showBoundary(mutation.error);
     }
   };
 
+  React.useEffect(() => {
+    if (customer) {
+      navigate('/chat');
+    }
+  }, [customer, navigate]);
+
   return (
     <>
-      <Head title="login" />
       {mutation.isPending && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <Spinner size="lg" />
