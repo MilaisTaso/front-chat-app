@@ -11,4 +11,5 @@ export const publicRouter = createBrowserRouter([
       </ErrorBoundary>
     ),
   },
+  // { path: 'profile', element: <div>profile page</div> },
 ]);
