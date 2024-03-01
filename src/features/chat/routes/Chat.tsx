@@ -17,21 +17,25 @@ export const ChatPage: React.FC = () => {
   const customerImage = useCustomerImage(customer!.imageUrl);
 
   React.useEffect(() => {
-    if (!customer) {
-      navigate('/')
+    if (customer == null) {
+      navigate('/');
     }
-  },[customer,navigate]);
+  }, [customer, navigate]);
 
   return (
     <Container className="w-4/5 border mt-16">
-      <React.Suspense fallback={<Spinner />}>
-        <ChatList
-          chats={chats}
-          customerImage={customerImage}
-          customerName={customer!.name}
-        />
-      <CreateChat customerId={customer!.id} />
-      </React.Suspense>
+      {customer === undefined ? (
+        <Spinner />
+      ) : (
+        <>
+          <ChatList
+            chats={chats}
+            customerImage={customerImage}
+            customerName={customer!.name}
+          />
+          <CreateChat customerId={customer!.id} />
+        </>
+      )}
     </Container>
   );
 };

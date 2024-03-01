@@ -27,7 +27,7 @@ export const ChatList: React.FC<ChatListProps> = ({
       >
         {chats.map((chat) => (
           <Card
-            id={chat.id}
+            key={chat.id}
             imagePath={customerImage}
             subtitle={customerName}
             content={chat.data.content}

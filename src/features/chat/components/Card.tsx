@@ -3,21 +3,18 @@ import { ConfirmationDialog } from '@/components/Dialog/ConfirmDialog';
 import { Button } from '@/components/Elements/Button';
 
 export type CardProps = {
-  id?: string;
   subtitle: string;
   imagePath: string;
   content: string;
 };
 
 export const Card: React.FC<CardProps> = ({
-  id,
   subtitle,
   imagePath,
   content,
 }) => {
   return (
     <div
-      key={id ?? subtitle}
       className="p-4 flex items-center space-x-4 w-4/5"
     >
       <ConfirmationDialog
