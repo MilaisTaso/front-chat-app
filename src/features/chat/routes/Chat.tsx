@@ -10,7 +10,6 @@ import { Container } from '@/components/Layout/Container';
 import { Spinner } from '@/components/Elements/Spinner';
 import { getStorageUrl } from '@/lib/firebase/storage';
 
-
 export const ChatPage: React.FC = () => {
   const navigate = useNavigate();
   const [customer] = useAtom(customerAtom);
@@ -31,6 +30,7 @@ export const ChatPage: React.FC = () => {
           setImageUrl(url); // 結果をステートにセット
         } catch (error) {
           console.error('Failed to load image URL:', error);
+          throw error;
         }
       }
     };

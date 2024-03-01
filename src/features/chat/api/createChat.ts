@@ -27,7 +27,6 @@ export const useCreateChat = ({ config, path }: useCreateChatOptions) => {
     onSuccess: () => {
       toast.success('done');
     },
-    // todo 楽観的更新によって追加したデータを消去しつつrefetchする勝利を追加する
     onError: (err) => {
       console.log(err.code);
       throw err;
