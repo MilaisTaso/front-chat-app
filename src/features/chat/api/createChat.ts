@@ -25,9 +25,10 @@ export const useCreateChat = ({ config, path }: useCreateChatOptions) => {
       return storeData<Chat>(newChat, path);
     },
     onSuccess: () => {
-      toast.success('done');
+      toast.success('メッセージの作成に成功しました');
     },
     onError: (err) => {
+      toast.error('メッセージの作成に失敗しました')
       console.log(err.code);
       throw err;
     },

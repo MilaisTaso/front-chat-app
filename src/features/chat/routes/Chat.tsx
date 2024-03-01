@@ -18,7 +18,6 @@ export const ChatPage: React.FC = () => {
 
   React.useEffect(() => {
     let unsubscribe: () => void;
-    console.log(customer);
     if (customer == null) {
       navigate('/');
     }
@@ -55,8 +54,8 @@ export const ChatPage: React.FC = () => {
         <>
           <ChatList
             chats={chats}
+            customer={customer!}
             customerImage={imageUrl}
-            customerName={customer!.name}
           />
           <CreateChat customerId={customer!.id} />
         </>

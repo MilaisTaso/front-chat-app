@@ -2,7 +2,6 @@ import React from 'react';
 import { z } from 'zod';
 import { useErrorBoundary } from 'react-error-boundary';
 
-import { toast } from 'react-toastify';
 import { Form } from '@/components/Form/Form';
 import { Chat, useCreateChat, useCreateChatOptions } from '../api/createChat';
 import { TextAreaField } from '@/components/Form/TextAreaField';
@@ -38,9 +37,7 @@ export const CreateChat: React.FC<CreateChatProps> = ({ customerId }) => {
             createdAt: new Date().toString(),
           },
         });
-        if (mutate.isSuccess) {
-          toast.success('メッセージを作成しました');
-        }
+
         if (mutate.isError) {
           showBoundary(mutate.error);
         }

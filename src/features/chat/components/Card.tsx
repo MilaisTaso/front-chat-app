@@ -8,21 +8,18 @@ export type CardProps = {
   content: string;
 };
 
-export const Card: React.FC<CardProps> = ({
-  subtitle,
-  imagePath,
-  content,
-}) => {
+export const Card: React.FC<CardProps> = ({ subtitle, imagePath, content }) => {
   return (
-    <div
-      className="p-4 flex items-center space-x-4 w-4/5"
-    >
+    <div className="p-4 flex space-x-2 w-4/5">
       <ConfirmationDialog
         icon="info"
         title="Your Profile"
         body="Your Profile Content"
         triggerButton={
-          <Button size='sm' className='py-0 px-0 bg-white border-none shadow-none'>
+          <Button
+            size="sm"
+            className="py-0 px-0 bg-white border-none shadow-none"
+          >
             <img
               src={imagePath}
               alt="profile"
@@ -30,13 +27,9 @@ export const Card: React.FC<CardProps> = ({
             />
           </Button>
         }
-        confirmButton={
-          <Button size='sm'>
-            編集
-          </Button>
-        }
+        confirmButton={<Button size="sm">編集</Button>}
       />
-      <div className='border border-gray-200 rounded-lg flex-auto flex flex-col gap-2 p-3'>
+      <div className="border border-black rounded-lg flex w-3/5 flex-col gap-2 p-3">
         <p className="font-bold">{subtitle}</p>
         <p className="text-gray-600">{content}</p>
       </div>

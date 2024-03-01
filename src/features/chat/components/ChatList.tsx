@@ -1,20 +1,22 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Container } from '@/components/Layout/Container';
-import { Chats } from '../state/use-chats';
+import { Chats } from '@/features/chat/api/getChats';
 import { Card } from '@/features/chat/components/Card';
+import { ChatResponse } from '../api/getChats';
+import { Customer } from '@/features/auth/types/customer';
 
 type ChatListProps = {
   chats: Chats;
-  customerImage: string;
-  customerName: string;
+  customer: Customer
+  customerImage: string
   className?: string;
 };
 
 export const ChatList: React.FC<ChatListProps> = ({
   chats,
+  customer,
   customerImage,
-  customerName,
   className = '',
 }) => {
   return (
@@ -25,11 +27,11 @@ export const ChatList: React.FC<ChatListProps> = ({
           className,
         )}
       >
-        {chats.map((chat) => (
+        {chats.map((chat: ChatResponse) => (
           <Card
             key={chat.id}
             imagePath={customerImage}
-            subtitle={customerName}
+            subtitle={customer.name}
             content={chat.data.content}
           />
         ))}
