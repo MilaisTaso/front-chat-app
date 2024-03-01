@@ -1,25 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 
 import { useNavigate } from 'react-router-dom';
-import { useChats } from '../state/use-chats';
-import { useCustomerImage } from '@/features/chat/state/use-customer-images';
+import { Chats, getChats } from '@/features/chat/api/getChats';
 import { ChatList } from '@/features/chat/components/ChatList';
 import { CreateChat } from '../components/CreateChat';
 import { customerAtom } from '@/features/auth/state/use-auth';
 import { Container } from '@/components/Layout/Container';
 import { Spinner } from '@/components/Elements/Spinner';
+import { getStorageUrl } from '@/lib/firebase/storage';
+
 
 export const ChatPage: React.FC = () => {
   const navigate = useNavigate();
   const [customer] = useAtom(customerAtom);
-  const chats = useChats(customer!.id);
-  const customerImage = useCustomerImage(customer!.imageUrl);
+  const [chats, setChats] = React.useState<Chats>([]);
+  const [imageUrl, setImageUrl] = useState<string>('');
 
   React.useEffect(() => {
+    let unsubscribe: () => void;
+    console.log(customer);
     if (customer == null) {
       navigate('/');
     }
+
+    const fetchImageUrl = async () => {
+      if (customer && customer.imageUrl) {
+        try {
+          const url = await getStorageUrl(customer.imageUrl); // 非同期関数をawaitして結果を待ちます
+          setImageUrl(url); // 結果をステートにセット
+        } catch (error) {
+          console.error('Failed to load image URL:', error);
+        }
+      }
+    };
+
+    if (customer) {
+      unsubscribe = getChats(customer.id, setChats);
+      fetchImageUrl(); // 非同期関数を呼び出します
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
   }, [customer, navigate]);
 
   return (
@@ -30,7 +55,7 @@ export const ChatPage: React.FC = () => {
         <>
           <ChatList
             chats={chats}
-            customerImage={customerImage}
+            customerImage={imageUrl}
             customerName={customer!.name}
           />
           <CreateChat customerId={customer!.id} />
